@@ -17,10 +17,8 @@
     "test": "jest"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "cross-env NODE_ENV=development eslint --cache"
-    ],
-    "{*.json,.{babelrc,eslintrc,prettierrc}}": [
+    "*.{js,jsx,ts,tsx}": ["cross-env NODE_ENV=development eslint --cache"],
+    "{*.json,.{babelrc,prettierrc}}": [
       "prettier --ignore-path .eslintignore --parser json --write"
     ],
     "*.{css,scss}": [
@@ -44,9 +42,7 @@
     ],
     "afterSign": ".erb/scripts/Notarize.js",
     "mac": {
-      "target": [
-        "dmg"
-      ],
+      "target": ["dmg"],
       "type": "distribution",
       "hardenedRuntime": true,
       "entitlements": "assets/entitlements.mac.plist",
@@ -68,14 +64,10 @@
       ]
     },
     "win": {
-      "target": [
-        "nsis"
-      ]
+      "target": ["nsis"]
     },
     "linux": {
-      "target": [
-        "AppImage"
-      ],
+      "target": ["AppImage"],
       "category": "Development"
     },
     "directories": {
@@ -83,13 +75,8 @@
       "buildResources": "assets",
       "output": "release"
     },
-    "extraResources": [
-      "./assets/**",
-      "./src/dto"
-    ],
-    "extraFiles": [
-      "./src/dto"
-    ],
+    "extraResources": ["./assets/**", "./src/dto"],
+    "extraFiles": ["./src/dto"],
     "publish": {
       "provider": "github",
       "owner": "electron-react-antd",
@@ -133,20 +120,9 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.erb/mocks/fileMock.js",
       "\\.(css|less|sass|scss)$": "identity-obj-proxy"
     },
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "ts",
-      "tsx",
-      "json"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "src/node_modules"
-    ],
-    "setupFiles": [
-      "./.erb/scripts/CheckBuildsExist.js"
-    ]
+    "moduleFileExtensions": ["js", "jsx", "ts", "tsx", "json"],
+    "moduleDirectories": ["node_modules", "src/node_modules"],
+    "setupFiles": ["./.erb/scripts/CheckBuildsExist.js"]
   },
   "devDependencies": {
     "@ant-design/icons": "^4.6.2",
@@ -274,12 +250,8 @@
   },
   "browserslist": [],
   "renovate": {
-    "extends": [
-      "bliss"
-    ],
-    "baseBranches": [
-      "next"
-    ]
+    "extends": ["bliss"],
+    "baseBranches": ["next"]
   },
   "husky": {
     "hooks": {
