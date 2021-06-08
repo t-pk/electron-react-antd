@@ -41,7 +41,7 @@ ${chalk.whiteBright.bgRed.bold('yarn add your-package')}
 ${chalk.whiteBright.bgGreen.bold('cd ./src && yarn add your-package')}
  Read more about native dependencies at:
 ${chalk.bold(
-  'https://electron-react-boilerplate.js.org/docs/adding-dependencies/#module-structure',
+  'https://electron-react-antd.js.org/docs/adding-dependencies/#module-structure',
 )}
  `);
       process.exit(1);
