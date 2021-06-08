@@ -24,7 +24,7 @@ export default class AppUpdater {
   }
 }
 
-let mainWindow: BrowserWindow | null = null;
+let mainWindow = null;
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -46,7 +46,7 @@ const installExtensions = async () => {
   return installer
     .default(
       extensions.map((name) => installer[name]),
-      forceDownload
+      forceDownload,
     )
     .catch(console.log);
 };
@@ -63,7 +63,7 @@ const createWindow = async () => {
     ? path.join(process.resourcesPath, 'assets')
     : path.join(__dirname, '../assets');
 
-  const getAssetPath = (...paths: string[]): string => {
+  const getAssetPath = (...paths) => {
     return path.join(RESOURCES_PATH, ...paths);
   };
 
@@ -77,7 +77,6 @@ const createWindow = async () => {
     },
   });
 
-  
   mainWindow.loadURL(`file://${__dirname}/index.html`);
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
