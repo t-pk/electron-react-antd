@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -6,16 +5,16 @@ import PropTypes from 'prop-types';
 export const PrivateRoute = ({
   component: Component,
   layout: Layout,
-  ...rest
+  exact,
+  path,
 }) => {
   return (
     <Route
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...rest}
-      render={(props) =>
-        localStorage.getItem('token') ? (
+      {...{ exact, path }}
+      render={() => {
+        return localStorage.getItem('token') ? (
           <Layout>
-            <Component {...props} />
+            <Component />
           </Layout>
         ) : (
           <Redirect
@@ -23,8 +22,8 @@ export const PrivateRoute = ({
               pathname: '/',
             }}
           />
-        )
-      }
+        );
+      }}
     />
   );
 };
@@ -32,6 +31,8 @@ export const PrivateRoute = ({
 PrivateRoute.propTypes = {
   component: PropTypes.elementType.isRequired,
   layout: PropTypes.elementType.isRequired,
+  exact: PropTypes.bool.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 export default PrivateRoute;
