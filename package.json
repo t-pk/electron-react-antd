@@ -92,8 +92,8 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "electron-react-boilerplate",
-      "repo": "electron-react-boilerplate"
+      "owner": "electron-react-antd",
+      "repo": "electron-react-antd"
     }
   },
   "repository": {
