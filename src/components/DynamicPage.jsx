@@ -1,14 +1,15 @@
 import React from 'react';
-import { Layout } from 'antd';
 import { Link } from 'react-router-dom';
 import LayoutP from './Layout';
-
-const { Header } = Layout;
 
 const DynamicPage = () => {
   return (
     <LayoutP>
+      <p>sadad</p>
       <Link to="/">This page was loaded asynchronously!!!</Link>
+      {/* <Link to="/login">Login</Link>
+      <Link to="/test">Test</Link>
+      <Link to="/noMatch">noMatch</Link> */}
     </LayoutP>
   );
 };

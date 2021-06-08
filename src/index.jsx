@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import store from './store';
 import './index.less';
-//process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+// process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
 ReactDOM.render(
   <Provider store={store}>

@@ -6,15 +6,17 @@ const instanceAPI = axios.create({
   },
 });
 
-export const fetch = async (endpoint, method = 'GET', params = {}, body) => {
+const fetch = async (endpoint, method = 'GET', params = {}, body) => {
   try {
     return instanceAPI({
-      method: method,
+      method,
       url: endpoint,
       data: body,
-      params: params,
+      params,
     });
   } catch (err) {
     return err;
   }
 };
+
+export default fetch;

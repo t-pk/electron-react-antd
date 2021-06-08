@@ -1,49 +1,55 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
-import { Button, Input } from 'antd';
+import { Button } from 'antd';
 import LayoutP from './Layout';
 import { actionTest, actionClick } from '../actions';
 
 class Home extends React.Component {
-  constructor(props:any) {
+  constructor(props) {
     super(props);
     this.state = {
-      valueOnchange: '',
       arrClick: [],
+      input: '',
     };
   }
 
-  handleOnchange = e => {
+  handleOnchange = (e) => {
+    const { reduxTest } = this.props;
     const { value } = e.target;
     this.setState({
-      valueOnchange: value,
+      input: value,
     });
-    this.props.reduxTest(value);
+    reduxTest(value);
   };
 
   handeClick = () => {
-    actionClick().then(res => {
-      this.setState({
-        arrClick: res.data,
+    actionClick()
+      .then((res) => {
+        return this.setState({
+          arrClick: res.data,
+        });
+      })
+      .catch((err) => {
+        throw err;
       });
-    });
   };
 
   render() {
-    const { arrClick } = this.state;
+    const { arrClick, input } = this.state;
     return (
       <LayoutP>
         <p>Hello World of React and Webpack!</p>
         <p>
-          <input onChange={this.handleOnchange}></input>
-          <Input></Input>
+          <input onChange={this.handleOnchange} value={input} />
+
           <Link to="/dynamic">Navigate to Dynamic Page</Link>
         </p>
         <Button onClick={this.handeClick}>TEst</Button>
         <div>
-          {arrClick.map((item, index) => (
+          {arrClick.map((item) => (
             <span key={shortid.generate()}>{item.template}</span>
           ))}
         </div>
@@ -51,16 +57,21 @@ class Home extends React.Component {
     );
   }
 }
-const mapStateToProps = state => {
+
+const mapStateToProps = (state) => {
   return {
     test: state.test,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  reduxTest: data => {
+const mapDispatchToProps = (dispatch) => ({
+  reduxTest: (data) => {
     return dispatch(actionTest(data));
   },
 });
+
+Home.propTypes = {
+  reduxTest: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

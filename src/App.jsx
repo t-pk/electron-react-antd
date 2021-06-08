@@ -1,18 +1,22 @@
 import React, { Suspense } from 'react';
-import { Switch, HashRouter as Router, Route, Redirect } from 'react-router-dom';
+import {
+  Switch,
+  HashRouter as Router,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import { Spin } from 'antd';
 import shortid from 'shortid';
+import { TransitionGroup } from 'react-transition-group';
 import routes from './routes';
-import { Router as Rt } from './dto';
-
 import { PrivateRoute, PublicRoute } from './layout';
 
 const App = () => {
-  const showContent = (routes: Rt[]) => {
-    let result: JSX.Element[] = [];
+  const showContent = (rt) => {
+    let result = [];
 
-    if (routes.length > 0) {
-      result = routes.map((route) => {
+    if (rt.length > 0) {
+      result = rt.map((route) => {
         return route.isPrivate ? (
           <PrivateRoute
             key={shortid()}
@@ -33,25 +37,25 @@ const App = () => {
       });
     }
 
-    result.push(<Route key= {shortid()} render={() => <Redirect to="/" />} />);
+    result.push(<Route key="login" render={() => <Redirect to="/login" />} />);
 
     return (
-      <Switch>
-        <Suspense
-          fallback={
-            <Spin>
-              <div className="is-spining" />
-            </Spin>
-          }
-        >
-          {result}
-        </Suspense>{' '}
-      </Switch>
+      <TransitionGroup>
+        <Switch>
+          <Suspense
+            fallback={
+              <Spin>
+                <div className="is-spining" />
+              </Spin>
+            }
+          >
+            {result}
+          </Suspense>{' '}
+        </Switch>
+      </TransitionGroup>
     );
   };
-  return (
-    <Router> {showContent(routes)} </Router>
-  );
+  return <Router> {showContent(routes)} </Router>;
 };
 
 export default App;

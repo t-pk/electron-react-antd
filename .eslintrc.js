@@ -1,8 +1,15 @@
 module.exports = {
   extends: 'erb',
   rules: {
-    // A temporary hack related to IDE not resolving correct package.json
     'import/no-extraneous-dependencies': 'off',
+    'comma-dangle': ['error', 'always-multiline'],
+    'prettier/prettier': [
+      'warn',
+      {
+        singleQuote: true,
+        semi: true,
+      },
+    ],
   },
   parserOptions: {
     ecmaVersion: 2020,

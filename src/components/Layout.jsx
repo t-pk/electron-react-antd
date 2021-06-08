@@ -1,11 +1,13 @@
-import './layout.less';
 import React from 'react';
-import { Layout, Divider } from 'antd';
+import './layout.less';
+import PropTypes from 'prop-types';
 import { SmileTwoTone } from '@ant-design/icons';
-const { Header } = Layout;
+import { Layout, Divider } from 'antd';
 import icon from '../../assets/test.jpeg';
 
-const LayoutP = ({ children }: any) => {
+const { Header } = Layout;
+
+const LayoutP = ({ children }) => {
   return (
     <div style={{ textAlign: 'center' }}>
       <Header className="h1">webpack-for-react</Header>
@@ -19,6 +21,14 @@ const LayoutP = ({ children }: any) => {
       </div>
     </div>
   );
+};
+
+LayoutP.defaultProps = {
+  children: null,
+};
+
+LayoutP.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default LayoutP;

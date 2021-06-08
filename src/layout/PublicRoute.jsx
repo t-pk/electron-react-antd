@@ -1,5 +1,7 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export const PublicRoute = ({
   component: Component,
@@ -8,10 +10,17 @@ export const PublicRoute = ({
 }) => (
   <Route
     {...rest}
-    render={props => (
+    render={(props) => (
       <Layout>
         <Component {...props} />
       </Layout>
     )}
   />
 );
+
+PublicRoute.propTypes = {
+  component: PropTypes.elementType.isRequired,
+  layout: PropTypes.elementType.isRequired,
+};
+
+export default PublicRoute;

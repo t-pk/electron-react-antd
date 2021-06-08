@@ -1,15 +1,18 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const PrivateRouteMode = ({
+export const PrivateRoute = ({
   component: Component,
   layout: Layout,
   ...rest
 }) => {
   return (
     <Route
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...rest}
-      render={props =>
+      render={(props) =>
         localStorage.getItem('token') ? (
           <Layout>
             <Component {...props} />
@@ -26,4 +29,9 @@ const PrivateRouteMode = ({
   );
 };
 
-export { PrivateRouteMode as PrivateRoute };
+PrivateRoute.propTypes = {
+  component: PropTypes.elementType.isRequired,
+  layout: PropTypes.elementType.isRequired,
+};
+
+export default PrivateRoute;
