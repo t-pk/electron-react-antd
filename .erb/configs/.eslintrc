@@ -2,13 +2,13 @@
   "rules": {
     "no-console": "off",
     "global-require": "off",
-    "import/no-dynamic-require": "off",
-    "prettier/prettier": [
-      "warn",
-      {
-        "singleQuote": true,
-        "semi": true
-      }
-    ]
+    "import/no-dynamic-require": "off"
+    // "prettier/prettier": [
+    //   "warn",
+    //   {
+    //     "singleQuote": true,
+    //     "semi": true
+    //   }
+    // ]
   }
 }

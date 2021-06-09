@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './css.less';
 import icon from '../../assets/icon.jpeg';
+import authentication from '../utils/authentication';
+
+const MESSAGE_LOGIN_FAIL =
+  'username or password is incorrect. Please try again !';
 
 const Login = () => {
   const history = useHistory();
@@ -13,20 +17,31 @@ const Login = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const onFinish = async () => {
+  const onFinishFailed = () => {
+    setLoading(false);
+    message.warning({
+      content: MESSAGE_LOGIN_FAIL,
+      className: 'custom-class',
+      style: {
+        marginLeft: '30%',
+        float: 'right',
+      },
+    });
+  };
+
+  const onFinish = async (user) => {
     setLoading(true);
-    await sleep(2500);
+    await sleep(500);
+
+    const isTrue = authentication.setUser(user);
+    if (!isTrue) return onFinishFailed();
 
     setLoading(false);
     message.success('Welcome! ;))))');
     await sleep(1200);
 
     history.push('/');
-  };
-
-  const onFinishFailed = () => {
-    setLoading(false);
-    message.error('good bye!');
+    return true;
   };
 
   return (
