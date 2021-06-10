@@ -6,7 +6,8 @@ import shortid from 'shortid';
 import { Button } from 'antd';
 import LayoutP from './Layout';
 import { actionTest, actionClick } from '../actions';
-
+import WebCapture from './Capture';
+ 
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -43,15 +44,16 @@ class Home extends React.Component {
       <LayoutP>
         <p>Hello World of React and Webpack!</p>
         <p>
-          <input onChange={this.handleOnchange} value={input} />
+          {/* <input onChange={this.handleOnchange} value={input} /> */}
 
           <Link to="/dynamic">Navigate to Dynamic Page</Link>
         </p>
-        <Button onClick={this.handeClick}>TEst</Button>
+        {/* <Button onClick={this.handeClick}>TEst</Button> */}
         <div>
-          {arrClick.map((item) => (
+          <WebCapture />
+          {/* {arrClick.map((item) => (
             <span key={shortid.generate()}>{item.template}</span>
-          ))}
+          ))} */}
         </div>
       </LayoutP>
     );

@@ -37,7 +37,7 @@ const Login = () => {
     if (!isTrue) return onFinishFailed();
 
     setLoading(false);
-    message.success('Welcome! ;))))');
+    // message.success('Welcome! ;))))');
     await sleep(1200);
 
     history.push('/');

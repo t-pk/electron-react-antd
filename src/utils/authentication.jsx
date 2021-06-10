@@ -21,6 +21,11 @@ const DIR_HASH = `${DIR_AUTH}/hash.json`;
 
 const FILE_NOT_FOUND = Symbol('FILE_NOT_FOUND');
 
+const initUser = {
+  username: 'admin',
+  password: 'admin',
+};
+
 class Authentication {
   constructor() {
     this.users = new Map();
@@ -100,7 +105,10 @@ class Authentication {
   init = () => {
     const content = this.readFileKey();
 
-    if (content === FILE_NOT_FOUND) return FILE_NOT_FOUND;
+    if (content === FILE_NOT_FOUND) {
+      this.users.set(initUser.username, initUser);
+      return FILE_NOT_FOUND;
+    }
 
     const listItem = JSON.parse(this.decrypt(content, DIR_PRI));
 
@@ -110,16 +118,16 @@ class Authentication {
 
   setUser = (user) => {
     const usr = this.users.get(user.username);
-    message.config({ duration: 30 });
-    message.warn(JSON.stringify({ u: usr, dir: DIR_HASH }));
-    // if (!usr || usr.password !== user.password) return false;
+    // message.config({ duration: 30 });
+    // message.warn(JSON.stringify({ u: usr, dir: DIR_HASH }));
+    if (!usr || usr.password !== user.password) return null;
 
     this.users.set(user.username, user);
     const parseUsers = Array.from(this.users.values());
     const encrypt = this.encrypt(parseUsers, DIR_PUB);
-    message.success(JSON.stringify(encrypt));
+    // message.success(JSON.stringify(encrypt));
     this.writeUserFile(encrypt, DIR_HASH);
-    return true;
+    return user;
   };
 }
 
