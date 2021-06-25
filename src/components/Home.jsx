@@ -2,44 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import shortid from 'shortid';
-import { Button } from 'antd';
 import LayoutP from './Layout';
-import { actionTest, actionClick } from '../actions';
+import { actionTest } from '../actions';
 import WebCapture from './Capture';
- 
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      arrClick: [],
-      input: '',
-    };
+    this.state = {};
   }
 
   handleOnchange = (e) => {
     const { reduxTest } = this.props;
     const { value } = e.target;
-    this.setState({
-      input: value,
-    });
     reduxTest(value);
   };
 
-  handeClick = () => {
-    actionClick()
-      .then((res) => {
-        return this.setState({
-          arrClick: res.data,
-        });
-      })
-      .catch((err) => {
-        throw err;
-      });
-  };
+  handeClick = () => {};
 
   render() {
-    const { arrClick, input } = this.state;
     return (
       <LayoutP>
         <p>Hello World of React and Webpack!</p>

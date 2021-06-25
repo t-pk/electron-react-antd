@@ -1,6 +1,5 @@
 import React from 'react';
 import Webcam from 'react-webcam';
-import { Button } from 'antd';
 
 const videoConstraints = {
   width: 1920,
@@ -11,8 +10,8 @@ const videoConstraints = {
 const WebcamCapture = () => {
   const webcamRef = React.useRef(null);
 
-  const capture = React.useCallback(() => {
-    const imageSrc = webcamRef.current.getScreenshot();
+  React.useCallback(() => {
+    webcamRef.current.getScreenshot();
   }, [webcamRef]);
 
   return (

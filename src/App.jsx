@@ -10,7 +10,7 @@ import shortid from 'shortid';
 import { TransitionGroup } from 'react-transition-group';
 import routes from './routes';
 import { PrivateRoute, PublicRoute } from './layout';
-    
+
 const App = () => {
   const showContent = (rt) => {
     let result = [];
