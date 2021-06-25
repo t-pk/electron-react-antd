@@ -21,8 +21,10 @@ class Home extends React.Component {
   handeClick = () => {};
 
   render() {
+    const { test } = this.props;
     return (
       <LayoutP>
+        {test}
         <p>Hello World of React and Webpack!</p>
         <p>
           {/* <input onChange={this.handleOnchange} value={input} /> */}
@@ -55,6 +57,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 Home.propTypes = {
   reduxTest: PropTypes.func.isRequired,
+  test: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
