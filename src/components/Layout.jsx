@@ -1,9 +1,9 @@
 import React from 'react';
-import './layout.less';
+// import './layout.less';
 import PropTypes from 'prop-types';
 import { SmileTwoTone } from '@ant-design/icons';
 import { Layout, Divider } from 'antd';
-import icon from '../../assets/test.jpeg';
+import './a.scss';
 
 const { Header } = Layout;
 
@@ -13,11 +13,14 @@ const LayoutP = ({ children }) => {
       <Header className="h1">webpack-for-react</Header>
       {children}
       <Divider />
-      <p className="pull-right">
+      <p className="ttt">
         Made with <SmileTwoTone /> by Tai Pham
       </p>
       <div className="hello">
-        <img width="50%" alt="icon" src={icon} />
+        <img width="50%" alt="icon" src="../assets/test.jpeg" />
+      </div>
+      <div className="hello">
+        <img width="50%" alt="124" src="../assets/haha.png" />
       </div>
     </div>
   );

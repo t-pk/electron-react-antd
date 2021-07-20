@@ -50,7 +50,7 @@ class Home extends React.Component {
         </p>
         {/* <Button onClick={this.handeClick}>TEst</Button> */}
         <div>
-          <WebCapture />
+          {/* <WebCapture /> */}
           {/* {arrClick.map((item) => (
             <span key={shortid.generate()}>{item.template}</span>
           ))} */}
