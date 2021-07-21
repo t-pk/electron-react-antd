@@ -35,7 +35,9 @@ Main.propTypes = {
 ReactDOM.render(
   <div>
     <Main state={store} />
-    <DevTools store={store} />
+    {process.env.REACT_APP_NODE_ENV.toUpperCase().startsWith('PROD') && (
+      <DevTools store={store} />
+    )}
   </div>,
   document.getElementById('root'),
 );
