@@ -1,11 +1,11 @@
 import React, { Suspense } from 'react';
 import { Layout, Spin } from 'antd';
 import PropTypes from 'prop-types';
-import Header from '../components/header';
+import HeaderPage from '../components/header';
 
 const PrivateLayout = ({ children }) => (
   <Layout className="main-layout">
-    <Header />
+    <HeaderPage />
     <div className="main-container">
       <Suspense
         fallback={

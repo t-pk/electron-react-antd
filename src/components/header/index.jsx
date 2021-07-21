@@ -1,8 +1,11 @@
 import React from 'react';
+import { Layout } from 'antd';
 import './header.scss';
 
-const Header = () => {
-  return <header>HEADER</header>;
+const { Header } = Layout;
+
+const HeaderPage = () => {
+  return <Header className="header" />;
 };
 
-export default Header;
+export default HeaderPage;

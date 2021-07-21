@@ -10,8 +10,6 @@ import './index.less';
 import './index.scss';
 import App from './App';
 
-process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
-
 const Main = ({ state }) => (
   <div>
     <Provider store={state}>
@@ -35,9 +33,7 @@ Main.propTypes = {
 ReactDOM.render(
   <div>
     <Main state={store} />
-    {process.env.REACT_APP_NODE_ENV.toUpperCase().startsWith('PROD') && (
-      <DevTools store={store} />
-    )}
+    <DevTools store={store} />
   </div>,
   document.getElementById('root'),
 );

@@ -15,12 +15,14 @@ const routes = [
     exact: true,
     layout: PrivateLayout,
     main: HomePage,
+    name: 'HomePage',
   },
   {
     path: '/login',
     exact: true,
     layout: PublicLayout,
     main: LoginPage,
+    name: 'LoginPage',
   },
   {
     path: '/account',
@@ -28,11 +30,13 @@ const routes = [
     layout: PrivateLayout,
     main: AccountPage,
     isPrivate: true,
+    name: 'AccountPage',
   },
   {
     path: '/not-found',
     layout: PublicLayout,
     main: NotFoundPage,
+    name: 'NotFoundPage',
   },
 ];
 
