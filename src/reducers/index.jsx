@@ -1,6 +1,8 @@
-import { combineReducers } from 'redux';
-import getTest from './getState';
+import users from './users';
+import combineReducers from '../utils/combineReducers';
 
-const rootReducer = combineReducers({ test: getTest });
+const rootReducer = combineReducers({
+  users,
+});
 
 export default rootReducer;

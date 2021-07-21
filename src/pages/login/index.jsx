@@ -1,14 +1,14 @@
 import { Form, Input, Button, message } from 'antd';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import './css.less';
-import icon from '../../assets/icon.jpeg';
-import authentication from '../utils/authentication';
+import icon from '../../../assets/icon.jpeg';
+import authentication from '../../utils/authentication';
+import './ui.scss';
 
 const MESSAGE_LOGIN_FAIL =
   'username or password is incorrect. Please try again !';
 
-const Login = () => {
+const LoginPage = () => {
   const history = useHistory();
 
   const sleep = (ms) => {
@@ -84,4 +84,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

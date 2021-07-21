@@ -9,7 +9,8 @@ import { Spin } from 'antd';
 import shortid from 'shortid';
 import { TransitionGroup } from 'react-transition-group';
 import routes from './routes';
-import { PrivateRoute, PublicRoute } from './layout';
+import PublicRoute from './layout/PublicRoute';
+import PrivateRoute from './layout/PrivateRoute';
 
 const App = () => {
   const showContent = (rt) => {

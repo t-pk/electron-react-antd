@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { Suspense } from 'react';
+import { Layout, Spin } from 'antd';
 import PropTypes from 'prop-types';
-import { Layout } from 'antd';
+import Header from '../components/header';
 
-export const PrivateLayout = ({ children }) => (
-  <Layout>
-    <>{children}</>
+const PrivateLayout = ({ children }) => (
+  <Layout className="main-layout">
+    <Header />
+    <div className="main-container">
+      <Suspense
+        fallback={
+          <Spin>
+            <div className="is-spining" />
+          </Spin>
+        }
+      >
+        <div className="main-content">{children}</div>
+      </Suspense>
+    </div>
   </Layout>
 );
 
-PrivateLayout.propTypes = {
-  children: PropTypes.elementType.isRequired,
-};
+// PrivateLayout.defaultProps = {
+//   children: null,
+// };
+
+// PrivateLayout.propTypes = {
+//   children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+// };
 
 export default PrivateLayout;

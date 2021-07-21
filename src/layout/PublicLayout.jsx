@@ -1,10 +1,8 @@
 import React, { Suspense } from 'react';
 import { Spin } from 'antd';
-// import { CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 
-export const PublicLayout = ({ children }) => {
-  // ({ path, children })
+const PublicLayout = ({ children }) => {
   return (
     <Suspense
       fallback={
@@ -13,21 +11,17 @@ export const PublicLayout = ({ children }) => {
         </Spin>
       }
     >
-      {/* <CSSTransition in key={path} classNames="page" timeout={500}> */}
-      <div className="page">{children}</div>
-      {/* </CSSTransition> */}
+      <div className="public-layout">{children}</div>
     </Suspense>
   );
 };
 
-PublicLayout.defaultProps = {
-  // path: null,
-  children: null,
-};
+// PublicLayout.defaultProps = {
+//   children: null,
+// };
 
-PublicLayout.propTypes = {
-  // path: PropTypes.string,
-  children: PropTypes.element,
-};
+// PublicLayout.propTypes = {
+//   children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+// };
 
 export default PublicLayout;

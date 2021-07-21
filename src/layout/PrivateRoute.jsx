@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { LOGIN_URL, TOKEN_KEY } from '../constants';
 
-export const PrivateRoute = ({
+const PrivateRoute = ({
   component: Component,
   layout: Layout,
   exact,
@@ -11,15 +12,15 @@ export const PrivateRoute = ({
   return (
     <Route
       {...{ exact, path }}
-      render={() => {
-        return localStorage.getItem('token') ? (
+      render={(props) => {
+        return localStorage.getItem(TOKEN_KEY) ? (
           <Layout>
-            <Component />
+            <Component {...props} />
           </Layout>
         ) : (
           <Redirect
             to={{
-              pathname: '/',
+              pathname: LOGIN_URL,
             }}
           />
         );
@@ -28,11 +29,11 @@ export const PrivateRoute = ({
   );
 };
 
-PrivateRoute.propTypes = {
-  component: PropTypes.elementType.isRequired,
-  layout: PropTypes.elementType.isRequired,
-  exact: PropTypes.bool.isRequired,
-  path: PropTypes.string.isRequired,
-};
+// PrivateRoute.propTypes = {
+//   component: PropTypes.elementType.isRequired,
+//   layout: PropTypes.elementType.isRequired,
+//   exact: PropTypes.bool.isRequired,
+//   path: PropTypes.string.isRequired,
+// };
 
 export default PrivateRoute;

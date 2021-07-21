@@ -1,5 +1,2 @@
-const test = {
-  TEST: 'TEST',
-};
-
-export default test;
+export * from './GlobalConstants';
+export * from './urlAPI';
