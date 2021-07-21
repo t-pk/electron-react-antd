@@ -16,12 +16,12 @@ const PublicLayout = ({ children }) => {
   );
 };
 
-// PublicLayout.defaultProps = {
-//   children: null,
-// };
+PublicLayout.defaultProps = {
+  children: null,
+};
 
-// PublicLayout.propTypes = {
-//   children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-// };
+PublicLayout.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+};
 
 export default PublicLayout;

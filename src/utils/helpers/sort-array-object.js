@@ -6,7 +6,10 @@
  */
 const sortCompareValues = (key, order = 'asc') => {
   return (a, b) => {
-    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+    if (
+      !Object.prototype.hasOwnProperty.call(a, key) ||
+      !Object.prototype.hasOwnProperty.call(b, key)
+    ) {
       return 0;
     }
 

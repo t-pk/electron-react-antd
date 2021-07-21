@@ -4,21 +4,23 @@ import UserItemContainer from './userItemContainer';
 
 const UserList = ({ users }) => (
   <div>
-    <div>
-      <ul>
-        {users.map((user) => (
-          <UserItemContainer key={user.id} user={user} />
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {users.map((user) => (
+        <UserItemContainer key={user.id} user={user} />
+      ))}
+    </ul>
   </div>
 );
 
 UserList.propTypes = {
   users: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      user: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      user: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+      }),
     }),
   ).isRequired,
 };

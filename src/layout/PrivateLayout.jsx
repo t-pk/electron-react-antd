@@ -20,12 +20,12 @@ const PrivateLayout = ({ children }) => (
   </Layout>
 );
 
-// PrivateLayout.defaultProps = {
-//   children: null,
-// };
+PrivateLayout.defaultProps = {
+  children: null,
+};
 
-// PrivateLayout.propTypes = {
-//   children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-// };
+PrivateLayout.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+};
 
 export default PrivateLayout;

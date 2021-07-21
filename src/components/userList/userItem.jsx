@@ -10,7 +10,7 @@ const UserItem = ({ id, name, email }) => (
 );
 
 UserItem.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
 };

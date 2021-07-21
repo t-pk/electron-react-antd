@@ -15,7 +15,7 @@ export const actGetUser = () => {
         return true;
       },
       (error) => {
-        console.log(error);
+        throw error;
       },
     );
   };

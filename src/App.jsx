@@ -14,10 +14,10 @@ import PrivateRoute from './layout/PrivateRoute';
 
 const App = () => {
   const showContent = (rt) => {
-    let result = [];
+    let pages = [];
 
     if (rt.length > 0) {
-      result = rt.map((route) => {
+      pages = rt.map((route) => {
         return route.isPrivate ? (
           <PrivateRoute
             key={shortid()}
@@ -38,7 +38,7 @@ const App = () => {
       });
     }
 
-    result.push(<Route key="login" render={() => <Redirect to="/login" />} />);
+    pages.push(<Route key="login" render={() => <Redirect to="/login" />} />);
 
     return (
       <TransitionGroup>
@@ -50,7 +50,7 @@ const App = () => {
               </Spin>
             }
           >
-            {result}
+            {pages}
           </Suspense>{' '}
         </Switch>
       </TransitionGroup>

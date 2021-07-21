@@ -14,6 +14,7 @@
     "start": "node -r @babel/register ./.erb/scripts/CheckPortInUse.js && yarn start:renderer",
     "start:main": "cross-env NODE_ENV=development electron -r ./.erb/scripts/BabelRegister ./src/main.dev.js",
     "start:renderer": "cross-env NODE_ENV=development webpack serve --config ./.erb/configs/webpack.config.renderer.dev.babel.js",
+    "electron": "ELECTRON_DISABLE_SECURITY_WARNINGS=true electron .",
     "test": "jest"
   },
   "dependencies": {

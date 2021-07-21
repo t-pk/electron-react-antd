@@ -17,25 +17,30 @@ class UserListContainer extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return { users: usersSelector(state) };
-}
-function mapDispatchToProps(dispatch) {
+};
+
+const mapDispatchToProps = (dispatch) => {
   return {
     onGetUser: () => {
       dispatch(actGetUser());
     },
   };
-}
+};
 
-// UserListContainer.propTypes = {
-//   onGetUser: PropTypes.func.isRequired,
-//   users: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       user: PropTypes.string.isRequired,
-//     }),
-//   ).isRequired,
-// };
+UserListContainer.defaultProps = {
+  users: [],
+};
+
+UserListContainer.propTypes = {
+  onGetUser: PropTypes.func.isRequired,
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      user: PropTypes.string,
+    }),
+  ),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserListContainer);
