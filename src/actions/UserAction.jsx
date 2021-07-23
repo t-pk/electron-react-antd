@@ -20,3 +20,28 @@ export const actGetUser = () => {
     );
   };
 };
+
+export const actDelLanguage = () => {
+  return Promise.all([
+    fetchApi('https://pktai.herokuapp.com/api/languages/1232', 'DELETE'),
+    fetchApi('https://pktai.herokuapp.com/api/languages/1233', 'DELETE'),
+    fetchApi('https://pktai.herokuapp.com/api/languages/1234', 'DELETE'),
+    fetchApi('https://pktai.herokuapp.com/api/languages/1235', 'DELETE'),
+  ])
+    .then((res) => true)
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const actGetLanguage = () => {
+  return fetchApi('https://pktai.herokuapp.com/api/languages', 'GET').then(
+    (response) => {
+      console.log('get', response);
+      return true;
+    },
+    (error) => {
+      throw error;
+    },
+  );
+};

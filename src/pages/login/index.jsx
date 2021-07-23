@@ -33,7 +33,7 @@ const LoginPage = () => {
     setLoading(true);
     await sleep(500);
 
-    const isTrue = authentication.setUser(user);
+    const isTrue = authentication.userLogin(user);
     if (!isTrue) return onFinishFailed();
 
     setLoading(false);

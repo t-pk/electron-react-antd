@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Modal } from 'antd';
+import { Modal, message } from 'antd';
 import * as urlAPI from '../constants/urlAPI';
 import { LOGIN_URL, TOKEN_KEY } from '../constants';
 import history from './history';
@@ -28,7 +28,7 @@ instanceNext.interceptors.request.use(
 );
 
 /**
- * @author: exe
+ * @author:
  * @description: handle response interceptor
  */
 let isShowModalExpried = false;
@@ -49,13 +49,23 @@ instanceNext.interceptors.response.use(
         content: 'Please login again',
         onOk: () => {
           // redirect to login page
-          history.push(LOGIN_URL);
-
+          history.push('index.html#/login');
+          window.location.reload();
           // clear token
           // clearAuthStorage();
 
           // dispatch action LOGOUT
           // store.dispatch({ type: auth.LOGOUT });
+        },
+      });
+    } else {
+      message.error({
+        duration: 12,
+        content: JSON.stringify(error),
+        className: 'custom-class',
+        style: {
+          marginLeft: '30%',
+          float: 'right',
         },
       });
     }

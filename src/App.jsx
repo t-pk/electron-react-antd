@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 import { Spin } from 'antd';
 import shortid from 'shortid';
-import { TransitionGroup } from 'react-transition-group';
 import routes from './routes';
 import PublicRoute from './layout/PublicRoute';
 import PrivateRoute from './layout/PrivateRoute';
@@ -41,19 +40,17 @@ const App = () => {
     pages.push(<Route key="login" render={() => <Redirect to="/login" />} />);
 
     return (
-      <TransitionGroup>
-        <Switch>
-          <Suspense
-            fallback={
-              <Spin>
-                <div className="is-spining" />
-              </Spin>
-            }
-          >
-            {pages}
-          </Suspense>{' '}
-        </Switch>
-      </TransitionGroup>
+      <Switch>
+        <Suspense
+          fallback={
+            <Spin>
+              <div className="is-spining" />
+            </Spin>
+          }
+        >
+          {pages}
+        </Suspense>{' '}
+      </Switch>
     );
   };
   return <Router> {showContent(routes)} </Router>;

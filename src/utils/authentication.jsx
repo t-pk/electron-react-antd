@@ -116,7 +116,7 @@ class Authentication {
     return true;
   };
 
-  setUser = (user) => {
+  userLogin = (user) => {
     const usr = this.users.get(user.username);
     // message.config({ duration: 30 });
     // message.warn(JSON.stringify({ u: usr, dir: DIR_HASH }));
