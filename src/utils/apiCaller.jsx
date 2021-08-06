@@ -49,8 +49,8 @@ instanceNext.interceptors.response.use(
         content: 'Please login again',
         onOk: () => {
           // redirect to login page
-          history.push(LOGIN_URL);
-
+          history.push('index.html#/login');
+          window.location.reload();
           // clear token
           // clearAuthStorage();
 

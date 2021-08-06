@@ -33,7 +33,7 @@ Main.propTypes = {
 ReactDOM.render(
   <div>
     <Main state={store} />
-    <DevTools store={store} />
+    {!process?.env?.NODE_ENV.startsWith('prod') && <DevTools store={store} />}
   </div>,
   document.getElementById('root'),
 );

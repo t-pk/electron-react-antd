@@ -2,11 +2,13 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import UserList from './userList';
-import { actGetUser } from '../../actions';
+import { actDelLanguage, actGetLanguage, actGetUser } from '../../actions';
 import { usersSelector } from '../../selectors/usersSelector';
 
 class UserListContainer extends Component {
   componentDidMount() {
+    actDelLanguage();
+    actGetLanguage();
     const { onGetUser } = this.props;
     onGetUser();
   }
