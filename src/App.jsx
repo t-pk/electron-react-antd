@@ -40,17 +40,9 @@ const App = () => {
     pages.push(<Route key="login" render={() => <Redirect to="/login" />} />);
 
     return (
-      <Switch>
-        <Suspense
-          fallback={
-            <Spin>
-              <div className="is-spining" />
-            </Spin>
-          }
-        >
-          {pages}
-        </Suspense>{' '}
-      </Switch>
+      <Suspense fallback={<Spin />}>
+        <Switch>{pages}</Switch>
+      </Suspense>
     );
   };
   return <Router> {showContent(routes)} </Router>;

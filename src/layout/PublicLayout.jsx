@@ -4,13 +4,7 @@ import PropTypes from 'prop-types';
 
 const PublicLayout = ({ children }) => {
   return (
-    <Suspense
-      fallback={
-        <Spin>
-          <div className="is-spining-full" />
-        </Spin>
-      }
-    >
+    <Suspense fallback={<Spin />}>
       <div className="public-layout">{children}</div>
     </Suspense>
   );

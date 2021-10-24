@@ -19,7 +19,7 @@ const LoginPage = () => {
 
   const onFinishFailed = () => {
     setLoading(false);
-    message.warning({
+    message.error({
       content: MESSAGE_LOGIN_FAIL,
       className: 'custom-class',
       style: {

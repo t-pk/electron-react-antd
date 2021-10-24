@@ -7,13 +7,7 @@ const PrivateLayout = ({ children }) => (
   <Layout className="main-layout">
     <HeaderPage />
     <div className="main-container">
-      <Suspense
-        fallback={
-          <Spin>
-            <div className="is-spining" />
-          </Spin>
-        }
-      >
+      <Suspense fallback={<Spin />}>
         <div className="main-content">{children}</div>
       </Suspense>
     </div>
