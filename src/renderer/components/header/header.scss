@@ -1,0 +1,9 @@
+@import '../../scss/config.scss';
+@import '../../scss/mixins.scss';
+
+header {
+  background-color: $c-white;
+  padding: 20px 0px;
+  margin-bottom: 15px;
+  text-align: center;
+}
