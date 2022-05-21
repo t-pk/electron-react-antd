@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Progress } from 'antd';
-import './style.scss';
+import './style.less';
 
 const ProgressBar = ({ percent }) => {
   return (

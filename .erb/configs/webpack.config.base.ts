@@ -1,11 +1,11 @@
 /**
  * Base webpack config used across other specific configs
  */
-import path from 'path';
+
 import webpack from 'webpack';
 import webpackPaths from './webpack.paths';
 import { dependencies as externals } from '../../release/app/package.json';
-import overideTheme from '../../src/renderer/config-color';
+import overideTheme from '../../src/custom_themes';
 
 const configuration: webpack.Configuration = {
   externals: [...Object.keys(externals || {})],
@@ -28,8 +28,12 @@ const configuration: webpack.Configuration = {
       {
         test: /\.less$/,
         use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
           {
             loader: 'less-loader',
             options: {
@@ -45,7 +49,7 @@ const configuration: webpack.Configuration = {
   },
 
   output: {
-    path: path.join(__dirname, '../../src'),
+    path: webpackPaths.srcPath,
     // https://github.com/webpack/webpack/issues/1114
     library: {
       type: 'commonjs2',
@@ -57,7 +61,7 @@ const configuration: webpack.Configuration = {
    */
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
-    modules: [path.join(__dirname, '../../src'), 'node_modules'],
+    modules: [webpackPaths.srcPath, 'node_modules'],
     fallback: {
       path: require.resolve('path-browserify'),
       crypto: require.resolve('crypto-browserify'),
@@ -68,21 +72,17 @@ const configuration: webpack.Configuration = {
   },
 
   plugins: [
-    new webpack.ProvidePlugin({
-      process: 'process/browser',
-      Buffer: ["buffer", "Buffer"],
-    }),
     new webpack.EnvironmentPlugin({
+      process: 'process/browser',
       NODE_ENV: 'production',
     }),
     new webpack.DefinePlugin({
-      'process.env.PATH_ENV': JSON.stringify(path.join(__dirname, '../../'))
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+  }),
+  new webpack.ProvidePlugin({
+    Buffer: ['buffer', 'Buffer'],
   })
   ],
-  node: {
-    __dirname: true,
-    __filename: true,
-  },
 };
 
 export default configuration;

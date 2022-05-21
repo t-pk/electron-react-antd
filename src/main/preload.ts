@@ -1,13 +1,5 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
-
 export type Channels = 'ipc-example';
-const fs = require('fs')
-contextBridge.exposeInMainWorld('electronFs', {
-  readFileSync: fs.readFileSync,
-  existsSync: fs.existsSync,
-  writeFile: fs.writeFile
-  // Other fs methods here
-});
 
 contextBridge.exposeInMainWorld('electron', {
   ipcRenderer: {
@@ -25,4 +17,12 @@ contextBridge.exposeInMainWorld('electron', {
       ipcRenderer.once(channel, (_event, ...args) => func(...args));
     },
   },
+});
+
+import fs from 'fs';
+import path from 'path';
+
+contextBridge.exposeInMainWorld('nodeJs', {
+  path,
+  fs
 });

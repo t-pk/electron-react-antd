@@ -258,7 +258,7 @@ export default class UserList extends Component {
           {...this.state}
           pagination={{
             position: [this.state.top, this.state.bottom],
-            defaultPageSize: 50,
+            defaultPageSize: 10,
           }}
           columns={tableColumns}
           dataSource={state.hasData ? this.props.users : null}

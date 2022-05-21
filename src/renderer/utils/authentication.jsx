@@ -1,52 +1,22 @@
-// import { TOKEN_KEY } from '../constants';
-
-// const initUser = {
-//   username: 'admin',
-//   password: 'admin',
-// };
-
-// class Authentication {
-//   constructor() {}
-
-//   userLogin = (user) => {
-//     if (
-//       initUser.username !== user.username ||
-//       initUser.password !== user.password
-//     )
-//       return null;
-//     localStorage.setItem(TOKEN_KEY, TOKEN_KEY);
-//     return user;
-//   };
-// }
-
-// const authentication = new Authentication();
-
-// export default authentication;
-
 import { message } from 'antd';
+import { TOKEN_KEY } from 'renderer/constants';
+import crypto from 'crypto';
 
-const crypto = require('crypto');
-const path = require('path');
-const fs = window.electronFs;
+const { fs, path } = window.nodeJs;
 
-const key = crypto.randomBytes(32);
-const iv = crypto.randomBytes(16);
+export const dirAuth =
+  path.resolve() +
+  (process.env.NODE_ENV === 'development'
+    ? '\\assets\\oooooo-55555-vvvvv-55555-ooooooo'
+    : '\\resources\\assets\\oooooo-55555-vvvvv-55555-ooooooo');
 
 const HEX = 'hex';
 const UTF_8 = 'utf8';
-const BASE_64 = 'base64';
+const PASS_PHRASE = 'vvv-111-ZZZ-777-ddd-@@@-000000-@@@-ddd-777-ZZZ-111-vvv';
 
-const algorithm = 'aes-256-cbc';
-const PASS_PHRASE = '!@#$%^&*()';
-
-const DIR_AUTH = String(process.env.PATH_ENV + 'authentication').replace(
-  /\\/g,
-  '\\\\'
-);
-
-const DIR_PUB = `${DIR_AUTH}/public.pem`;
-const DIR_PRI = `${DIR_AUTH}/private.pem`;
-const DIR_HASH = `${DIR_AUTH}/hash.json`;
+const DIR_PUB = `${dirAuth}\\hhh-444-xxx-333-iii-lll.pem`;
+const DIR_PRI = `${dirAuth}\\yyy-jjj-111-zzz-444-fff.pem`;
+const DIR_HASH = `${dirAuth}\\xxxxxx-444444-00000-444444-xxxxxx`;
 const FILE_NOT_FOUND = Symbol('FILE_NOT_FOUND');
 
 const initUser = {
@@ -57,112 +27,80 @@ const initUser = {
 class Authentication {
   constructor() {
     this.users = new Map();
-    this.init();
   }
 
-  encryptAES = (str) => {
-    const text = JSON.stringify(str);
-    const cipher = crypto.createCipheriv(algorithm, Buffer.from(key), iv);
-    let encrypted = cipher.update(text);
+  init = () => {
+    let data = this.getSecretData();
+    if (!data) {
+      this.users.set(initUser.username, initUser);
+      data = JSON.stringify(Array.from(this.users.values()));
+    } else {
+      data = this.descrypt(data);
+    }
+    data = Buffer.from(data).toString();
+    const parseData = JSON.parse(data);
 
-    encrypted = Buffer.concat([encrypted, cipher.final()]);
-    return {
-      iv: iv.toString(HEX),
-      encryptedData: encrypted.toString(HEX),
-    };
+    for (let user of parseData) {
+      this.users.set(user.username, user);
+    }
+
+    this.enscrypt(data);
   };
 
-  decryptAES = (text) => {
-    const ivd = Buffer.from(text.iv, HEX);
-    const encryptedText = Buffer.from(text.encryptedData, HEX);
-
-    const decipher = crypto.createDecipheriv(algorithm, Buffer.from(key), ivd);
-    let decrypted = decipher.update(encryptedText);
-
-    decrypted = Buffer.concat([decrypted, decipher.final()]);
-    return decrypted.toString();
-  };
-
-  encrypt = (toEncrypt, pathPublic) => {
-    // const absolutePath = path.resolve(pathPublic);
-    const absolutePath = pathPublic;
-    const publicKey = fs.readFileSync(absolutePath, UTF_8);
-    const aes = this.encryptAES(toEncrypt);
-    const buffer = Buffer.from(aes.iv, UTF_8);
-
-    const encrypted = crypto.publicEncrypt(publicKey, buffer);
-    aes.iv = encrypted.toString(BASE_64);
-    return aes;
-  };
-
-  decrypt = (toDecrypt, pathPrivate) => {
-    //const absolutePath = path.resolve(pathPrivate);
-    const absolutePath = pathPrivate;
-    const privateKey = fs.readFileSync(absolutePath, UTF_8);
-
-    const buffer = Buffer.from(toDecrypt.iv, BASE_64);
-    const decrypted = crypto.privateDecrypt(
-      {
-        key: privateKey.toString(),
-        passphrase: PASS_PHRASE,
-      },
-      buffer
-    );
-    toDecrypt.iv = decrypted.toString(UTF_8);
-    return this.decryptAES(toDecrypt);
-  };
-
-  readFileKey = (dir) => {
+  getSecretData = () => {
     try {
-      // const absolutePath = path.resolve(dir);
-      const absolutePath = dir;
-      const content = fs.readFileSync(absolutePath, UTF_8);
-
-      return content;
-    } catch (e) {
-      return FILE_NOT_FOUND;
+      const secretData = Buffer.from(fs.readFileSync(DIR_HASH)).toString();
+      console.log(secretData);
+      return secretData;
+    } catch (error) {
+      console.log('no Data', error.message);
+      return null;
     }
   };
 
+  enscrypt = (data) => {
+    const pubK = Buffer.from(fs.readFileSync(DIR_PUB)).toString();
+    const buf = Buffer.from(data, UTF_8);
+    const secretData = crypto.publicEncrypt(pubK, buf);
+
+    this.writeUserFile(secretData.toString(HEX), DIR_HASH);
+    return secretData.toString(HEX);
+  };
+
+  descrypt = (secretData) => {
+    console.log("secretData", secretData);
+    const privK = Buffer.from(fs.readFileSync(DIR_PRI)).toString();
+    console.log("privK", privK);
+    const hashData = Buffer.from(secretData, HEX);
+    console.log("hashData", hashData);
+    const origData = crypto.privateDecrypt(
+      {
+        key: privK,
+        passphrase: PASS_PHRASE,
+      },
+      hashData
+    );
+      console.log("origData", origData);
+    return origData;
+  };
+
   writeUserFile = (data, dir) => {
-    //const absolutePath = path.resolve(dir);
-    const absolutePath = dir;
-    fs.writeFile(absolutePath, JSON.stringify(data), (err) => {
-      if (err) message.warn(JSON.stringify(err));
+    fs.writeFileSync(dir, data, (err) => {
+      if (err) message.warning(JSON.stringify(err));
       return false;
     });
   };
 
-  init = () => {
-    const content = this.readFileKey();
-
-    if (content === FILE_NOT_FOUND) {
-      this.users.set(initUser.username, initUser);
-      return FILE_NOT_FOUND;
+  userLogin = (req) => {
+    console.log(req, this.users, dirAuth);
+    const user = this.users.get(req.username);
+    if (user && user.password === req.password) {
+      localStorage.setItem(TOKEN_KEY, JSON.stringify(req));
+      return true;
     }
-
-    const listItem = JSON.parse(this.decrypt(content, DIR_PRI));
-
-    this.users = new Map(listItem.map((item) => [item.username, item]));
-    return true;
-  };
-
-  userLogin = (user) => {
-    const usr = this.users.get(user.username);
-    // message.config({ duration: 30 });
-    // message.warn(JSON.stringify({ u: usr, dir: DIR_HASH }));
-    if (!usr || usr.password !== user.password) return null;
-
-    this.users.set(user.username, user);
-    const parseUsers = Array.from(this.users.values());
-    const encrypt = this.encrypt(parseUsers, DIR_PUB);
-    // message.success(JSON.stringify(encrypt));
-    this.writeUserFile(encrypt, DIR_HASH);
-    localStorage.setItem('token', user);
-    return user;
+    return false;
   };
 }
 
 const authentication = new Authentication();
-
 export default authentication;

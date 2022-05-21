@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { useNavigate, Redirect } from 'react-router-dom';
 import icon from '../../assets/icon.jpeg';
 import authentication from '../../utils/authentication';
-import history from '../../utils/history';
-import './ui.scss';
+// import history from '../../utils/history';
+import './ui.less';
 
 const MESSAGE_LOGIN_FAIL =
   'username or password is incorrect. Please try again !';
 
 const LoginPage = () => {
- // const history = useNavigate();
+ const navigate = useNavigate();
 
   const sleep = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -44,8 +44,8 @@ const LoginPage = () => {
 
     // return  <Redirect to="/" />
     // history('/', { replace: true });
-    history.push('/');
-    window.location.reload();
+    navigate('/');
+    // window.location.reload();
     //  return true;
   };
 
