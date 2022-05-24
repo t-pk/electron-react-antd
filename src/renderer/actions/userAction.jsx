@@ -4,29 +4,36 @@ import makeActionCreator from '../utils/makeActionCreator';
 
 export const fetchUsersSuccess = makeActionCreator(
   FETCH_USERS_SUCCESS,
-  `users`,
+  `users`
 );
 
 export const actGetUser = () => {
   return async (dispatch) => {
     return fetchApi(
       'https://run.mocky.io/v3/2f41b55d-45d3-4fcb-95d5-3a49aefe6bf1',
-      'GET',
+      'GET'
     ).then(
       (response) => {
         let a = [];
         let index = 0;
-        setInterval(() => {
-          a.push(response.data[index]);
-          index++;
-          dispatch(fetchUsersSuccess(a));
-        }, 1000);
+        // response.data.length = 3;
+        let data = response.data;
+        for (let i = 0; i < 10; i++) {
+          data = data.concat(response.data);
+        }
+        dispatch(fetchUsersSuccess(data));
+        console.log(data.length);
+        // setInterval(() => {
+        //   a.push(data[index]);
+        //   dispatch(fetchUsersSuccess(data[index]));
+        //   index++;
+        // }, 3);
 
         return true;
       },
       (error) => {
         throw error;
-      },
+      }
     );
   };
 };
@@ -35,11 +42,11 @@ export const actDelLanguage = () => {
   return Promise.all([
     fetchApi(
       'https://run.mocky.io/v3/c89baede-c9cb-4c68-b3f8-0195537a9d6c',
-      'GET',
+      'GET'
     ),
     fetchApi(
       'https://run.mocky.io/v3/c89baede-c9cb-4c68-b3f8-0195537a9d6c',
-      'GET',
+      'GET'
     ),
   ])
     .then(() => true)
@@ -51,7 +58,7 @@ export const actDelLanguage = () => {
 export const actGetLanguage = () => {
   return fetchApi(
     'https://run.mocky.io/v3/c89baede-c9cb-4c68-b3f8-0195537a9d6c',
-    'GET',
+    'GET'
   ).then(
     () => {
       // console.log('get', response);
@@ -59,6 +66,6 @@ export const actGetLanguage = () => {
     },
     (error) => {
       throw error;
-    },
+    }
   );
 };

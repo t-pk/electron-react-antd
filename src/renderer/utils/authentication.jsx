@@ -50,10 +50,10 @@ class Authentication {
   getSecretData = () => {
     try {
       const secretData = Buffer.from(fs.readFileSync(DIR_HASH)).toString();
-      console.log(secretData);
+      //console.log(secretData);
       return secretData;
     } catch (error) {
-      console.log('no Data', error.message);
+      //console.log('no Data', error.message);
       return null;
     }
   };
@@ -68,11 +68,11 @@ class Authentication {
   };
 
   descrypt = (secretData) => {
-    console.log("secretData", secretData);
+   // console.log("secretData", secretData);
     const privK = Buffer.from(fs.readFileSync(DIR_PRI)).toString();
-    console.log("privK", privK);
+   // console.log("privK", privK);
     const hashData = Buffer.from(secretData, HEX);
-    console.log("hashData", hashData);
+   // console.log("hashData", hashData);
     const origData = crypto.privateDecrypt(
       {
         key: privK,
@@ -80,7 +80,7 @@ class Authentication {
       },
       hashData
     );
-      console.log("origData", origData);
+    //  console.log("origData", origData);
     return origData;
   };
 
@@ -92,7 +92,7 @@ class Authentication {
   };
 
   userLogin = (req) => {
-    console.log(req, this.users, dirAuth);
+   // console.log(req, this.users, dirAuth);
     const user = this.users.get(req.username);
     if (user && user.password === req.password) {
       localStorage.setItem(TOKEN_KEY, JSON.stringify(req));

@@ -48,10 +48,62 @@ const App = () => {
         }
       >
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/account" element={<AccountPage />} />
-          <Route path="/404" element={<NotFoundPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/"
+            element={
+              <Suspense
+                fallback={
+                  <Spin>
+                    <div className="is-spining-full" />
+                  </Spin>
+                }
+              >
+                <HomePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <Suspense
+                fallback={
+                  <Spin>
+                    <div className="is-spining-full" />
+                  </Spin>
+                }
+              >
+                <AccountPage />{' '}
+              </Suspense>
+            }
+          />
+          <Route
+            path="/404"
+            element={
+              <Suspense
+                fallback={
+                  <Spin>
+                    <div className="is-spining-full" />
+                  </Spin>
+                }
+              >
+                <NotFoundPage />{' '}
+              </Suspense>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <Suspense
+                fallback={
+                  <Spin>
+                    <div className="is-spining-full" />
+                  </Spin>
+                }
+              >
+                <LoginPage />
+              </Suspense>
+            }
+          />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </Suspense>

@@ -15,6 +15,7 @@ import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
+app.commandLine.appendSwitch("js-flags", "--max-old-space-size=8192");
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -75,6 +76,7 @@ const createWindow = async () => {
     height: 728,
     icon: getAssetPath('icon.png'),
     webPreferences: {
+      additionalArguments: ['--js-flags="--max-old-space-size=8192"'],
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),

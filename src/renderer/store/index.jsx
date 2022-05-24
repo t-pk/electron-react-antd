@@ -5,11 +5,11 @@ import { DevTools } from '../components';
 import rootReducer from '../reducers';
 import getDefaultState from './getDefaultState';
 
-const logger = createLogger({
-  stateTransformer: (state) => state.toJS(),
-});
+// const logger = process.env createLogger({
+//   stateTransformer: (state) => state.toJS(),
+// });
 
-const enhancer = compose(applyMiddleware(thunk, logger), DevTools.instrument());
+const enhancer = compose(applyMiddleware(thunk), DevTools.instrument());
 const defaultState = getDefaultState();
 const store = createStore(rootReducer, defaultState, enhancer);
 

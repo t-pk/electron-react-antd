@@ -24,8 +24,7 @@ const LoginPage = () => {
       content: MESSAGE_LOGIN_FAIL,
       className: 'custom-class',
       style: {
-        marginLeft: '30%',
-        float: 'right',
+        textAlign: "right"
       },
     });
   };

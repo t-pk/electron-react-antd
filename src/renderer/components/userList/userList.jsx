@@ -26,7 +26,7 @@ const columns = [
   },
 
   {
-    title: 'Address',
+    titlpaginatione: 'Address',
     dataIndex: 'address',
   },
   {
