@@ -7,16 +7,16 @@ const { fs, path } = window.nodeJs;
 export const dirAuth =
   path.resolve() +
   (process.env.NODE_ENV === 'development'
-    ? '\\assets\\oooooo-55555-vvvvv-55555-ooooooo'
-    : '\\resources\\assets\\oooooo-55555-vvvvv-55555-ooooooo');
+    ? '/assets/oooooo-55555-vvvvv-55555-ooooooo'
+    : '/resources/assets/oooooo-55555-vvvvv-55555-ooooooo');
 
 const HEX = 'hex';
 const UTF_8 = 'utf8';
 const PASS_PHRASE = 'vvv-111-ZZZ-777-ddd-@@@-000000-@@@-ddd-777-ZZZ-111-vvv';
 
-const DIR_PUB = `${dirAuth}\\hhh-444-xxx-333-iii-lll.pem`;
-const DIR_PRI = `${dirAuth}\\yyy-jjj-111-zzz-444-fff.pem`;
-const DIR_HASH = `${dirAuth}\\xxxxxx-444444-00000-444444-xxxxxx`;
+const DIR_PUB = `${dirAuth}/hhh-444-xxx-333-iii-lll.pem`;
+const DIR_PRI = `${dirAuth}/yyy-jjj-111-zzz-444-fff.pem`;
+const DIR_HASH = `${dirAuth}/xxxxxx-444444-00000-444444-xxxxxx`;
 const FILE_NOT_FOUND = Symbol('FILE_NOT_FOUND');
 
 const initUser = {
